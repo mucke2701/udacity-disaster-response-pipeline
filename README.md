@@ -83,7 +83,7 @@ You can use **ML Pipeline Preparation Notebook** to re-train the model or tune i
 <a name="authors"></a>
 ## Authors
 
-* [Naveen Setia](https://github.com/canaveensetia)
+* [Mauricio Hess](https://github.com/mucke2701)
 
 <a name="license"></a>
 ## License
