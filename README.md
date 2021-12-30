@@ -64,7 +64,6 @@ git clone https://github.com/canaveensetia/udacity-disaster-response-pipeline.gi
 <a name="material"></a>
 ### Additional Material
 
-In the **data** and **models** folder you can find two jupyter notebook that will help you understand how the model works step by step:
 1. **ETL Preparation Notebook**: learn everything about the implemented ETL pipeline
 2. **ML Pipeline Preparation Notebook**: look at the Machine Learning Pipeline developed with NLTK and Scikit-Learn
 
