@@ -15,6 +15,7 @@ Arguments Description:
 import sys
 import numpy as np
 import pandas as pd
+import os
 from sqlalchemy import create_engine
  
 def load_messages_with_categories(messages_filepath, categories_filepath):
@@ -71,7 +72,7 @@ def save_data_to_db(df, database_filename):
     """
     
     engine = create_engine('sqlite:///'+ database_filename)
-    table_name = database_filename.replace(".db","") + "_table"
+    table_name = os.path.basename(database_filename).replace(".db","") + "_table"
     df.to_sql(table_name, engine, index=False, if_exists='replace')
 
 def main():
