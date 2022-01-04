@@ -15,6 +15,7 @@ from nltk.corpus import stopwords
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import train_test_split
 import re
+import os
 import numpy as np
 from sklearn.metrics import confusion_matrix
 from sklearn.pipeline import Pipeline, FeatureUnion
@@ -30,8 +31,8 @@ import pickle
 
 def load_data(database_filepath):
     # load data from database
-    engine = create_engine('sqlite:///InsertDatabaseName.db')
-    df = pd.read_sql ('SELECT * FROM InsertTableName', engine)
+    engine = create_engine('sqlite:///' + database_filepath)
+    df = pd.read_sql ('SELECT * FROM '+  os.path.basename(database_filepath).replace(".db","") + "_table", engine)
     #display (df.head (n=10))
     X = df ['message']
     y = df.iloc[:,4:]
