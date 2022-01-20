@@ -43,23 +43,19 @@ def clean_categories_data(df):
     Outputs:
         df -> Combined data containing messages and categories with categories cleaned up
     """
-    
-    # Split the categories
-    categories = df['categories'].str.split(pat=';',expand=True)
-    
-    #Fix the categories columns name
-    row = categories.iloc[[1]]
-    category_colnames = [category_name.split('-')[0] for category_name in row.values[0]]
-    categories.columns = category_colnames
-    
-    for column in categories:
-        categories[column] = categories[column].str[-1]
-        categories[column] = categories[column].astype(np.int)
-    
-    df = df.drop('categories',axis=1)
-    df = pd.concat([df,categories],axis=1)
-    df = df.drop_duplicates()
-    
+    categories_cat = df.categories.str.split(';', expand=True)
+    listcategory = [str.split(category,'-')[0] for category in categories_cat.iloc[0]]
+    df[listcategory]=df.categories.str.split(';', expand=True)
+    #categories = categories.drop(['id','categories'])
+    for column in listcategory:
+        # set each value to be the last character of the string
+        df[column] = df[column].replace(regex=['.*-'], value='')
+        
+        # convert column from string to numeric
+        df[column] = pd.to_numeric(df[column])
+
+    df = df.drop(columns=['categories'])
+    df = df.drop_duplicates(keep = 'first')
     return df
 
 def save_data_to_db(df, database_filename):
